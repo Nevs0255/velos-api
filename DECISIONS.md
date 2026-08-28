@@ -1,3 +1,3 @@
 # Décisions du projet
 
-Seuil d'alerte : à décider.
+Seuil d'alerte : 3 vélos disponibles.
