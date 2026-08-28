@@ -1,0 +1,54 @@
+services:
+
+  db:
+    image: postgres:16-alpine
+
+    environment:
+      POSTGRES_DB: velos
+      POSTGRES_USER: velos
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/001-init.sql:ro
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U velos -d velos"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+    networks:
+      - backend
+
+  api:
+    build:
+      context: .
+      target: runtime
+
+    image: velos-api:1.0
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    environment:
+      DATABASE_URL: postgresql://velos:${POSTGRES_PASSWORD}@db:5432/velos
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: velos
+      DB_USER: velos
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+
+    ports:
+      - "8001:8000"
+
+    networks:
+      - backend
+
+volumes:
+  postgres_data:
+
+networks:
+  backend:
+    driver: bridge
