@@ -1,0 +1,13 @@
+.git
+.gitignore
+.venv
+venv
+__pycache__
+*.pyc
+.env
+.env.*
+captures
+RAPPORT.md
+QCM.md
+k8s
+.DS_Store
