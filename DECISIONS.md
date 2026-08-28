@@ -1,3 +1,3 @@
 # Décisions du projet
 
-Seuil d'alerte : 3 vélos disponibles.
+Seuil d'alerte : 2 vélos disponibles.
