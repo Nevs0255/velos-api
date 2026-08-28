@@ -1,0 +1,17 @@
+# Environnements Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+kubeconfig*
+
+.DS_Store
+
+.vscode/
+.idea/
